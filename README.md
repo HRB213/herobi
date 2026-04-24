@@ -1,3 +1,5 @@
+![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)
+
 [![Coverage Status](https://coveralls.io/repos/github/HRB213/herobi/badge.svg?branch=main)](https://coveralls.io/github/HRB213/herobi?branch=main)
 
 # herobi
