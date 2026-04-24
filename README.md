@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/HRB213/herobi/badge.svg?branch=main)](https://coveralls.io/github/HRB213/herobi?branch=main)
+
 # herobi
 
 ファイルやディレクトリの一覧を表示するCLIツール
