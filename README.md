@@ -1,5 +1,6 @@
 ![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)
 ![Language: Rust](https://img.shields.io/badge/language-Rust-orange.svg)
+![Last Commit](https://img.shields.io/github/last-commit/HRB213/herobi)
 [![Coverage Status](https://coveralls.io/repos/github/HRB213/herobi/badge.svg?branch=main)](https://coveralls.io/github/HRB213/herobi?branch=main)
 
 # herobi
