@@ -1,0 +1,54 @@
+name: publish
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'releases/v') && github.event.pull_request.merged == true
+    outputs:
+      tag: ${{ steps.vars.outputs.tag }}
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: Git Tag name
+        id: vars
+        run: |
+          echo "tag=${GITHUB_HEAD_REF##*/v}" >> $GITHUB_OUTPUT
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.vars.outputs.tag }}
+          release_name: Release v${{ steps.vars.outputs.tag }}
+          draft: true
+          prerelease: false
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Initialize Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "action@github.com"
+
+      - name: Create distribution files
+        run: |
+          echo "ここにビルド処理を書く（仮）"
+
+      - name: Upload assets
+        run: |
+          echo "ここにアップロード処理を書く（仮）"
