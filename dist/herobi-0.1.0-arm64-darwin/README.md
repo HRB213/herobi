@@ -1,0 +1,33 @@
+![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)
+![Language: Rust](https://img.shields.io/badge/language-Rust-orange.svg)
+![Last Commit](https://img.shields.io/github/last-commit/HRB213/herobi)
+[![Coverage Status](https://coveralls.io/repos/github/HRB213/herobi/badge.svg?branch=main)](https://coveralls.io/github/HRB213/herobi?branch=main)
+
+# herobi
+
+ファイルやディレクトリの一覧を表示するCLIツール
+
+## Description
+
+本ソフトウェアは、指定したパス内のファイルやディレクトリを一覧表示するコマンドラインツールである。  
+標準的なlsコマンドと同様の基本機能を提供し、シンプルにディレクトリ内容を確認できることを目的とする。
+
+## Usage
+
+my_ls [PATH]
+
+指定したパス内のファイルおよびディレクトリを一覧表示する。
+
+Arguments:
+  PATH                 対象とするディレクトリのパス（省略可能）
+
+Options:
+  -h, --help           ヘルプメッセージを表示
+  -V, --version        バージョン情報を表示
+
+Examples:
+  my_ls
+  カレントディレクトリの内容を表示する。
+
+  my_ls /home/user
+  指定したディレクトリの内容を表示する。

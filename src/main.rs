@@ -2,6 +2,7 @@ use clap::Parser;
 use std::fs;
 use std::path::PathBuf;
 use std::process;
+mod gencomp;
 
 /// ファイルやディレクトリの一覧を表示するCLIツール
 #[derive(Parser, Debug)]
@@ -11,7 +12,7 @@ use std::process;
     about = "ファイルやディレクトリの一覧を表示するCLIツール",
     long_about = "指定したディレクトリ内のファイルおよびディレクトリを一覧表示します。"
 )]
-#[derive(Parser, Debug)]
+
 struct Cli {
 
     #[arg(default_value = ".")]
@@ -36,7 +37,8 @@ fn main() {
     let cli = Cli::parse();
 
     if cli.completions {
-    // 補完ファイルを生成する処理
+    gencomp::generate_completions().unwrap();
+    return;
     }
 
     if let Err(err) = list_directory(&cli.path) {
