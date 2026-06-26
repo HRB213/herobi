@@ -11,14 +11,33 @@ use std::process;
     about = "ファイルやディレクトリの一覧を表示するCLIツール",
     long_about = "指定したディレクトリ内のファイルおよびディレクトリを一覧表示します。"
 )]
+#[derive(Parser, Debug)]
 struct Cli {
-    /// 対象ディレクトリ（省略時はカレントディレクトリ）
+
     #[arg(default_value = ".")]
+
     path: PathBuf,
+
+    #[arg(
+
+        long,
+
+        help = "Generate shell completion files",
+
+        default_value_t = false
+
+    )]
+
+    completions: bool,
+
 }
 
 fn main() {
     let cli = Cli::parse();
+
+    if cli.completions {
+    // 補完ファイルを生成する処理
+    }
 
     if let Err(err) = list_directory(&cli.path) {
         eprintln!("Error: {err}");
