@@ -1,3 +1,43 @@
+use clap::Parser;
+use std::fs;
+use std::path::PathBuf;
+use std::process;
+
+/// ファイルやディレクトリの一覧を表示するCLIツール
+#[derive(Parser, Debug)]
+#[command(
+    name = "herobi",
+    version,
+    about = "ファイルやディレクトリの一覧を表示するCLIツール",
+    long_about = "指定したディレクトリ内のファイルおよびディレクトリを一覧表示します。"
+)]
+struct Cli {
+    /// 対象ディレクトリ（省略時はカレントディレクトリ）
+    #[arg(default_value = ".")]
+    path: PathBuf,
+}
+
 fn main() {
-    println!("Hello, world!");
+    let cli = Cli::parse();
+
+    if let Err(err) = list_directory(&cli.path) {
+        eprintln!("Error: {err}");
+        process::exit(1);
+    }
+}
+
+fn list_directory(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+    let mut entries = Vec::new();
+
+    for entry in fs::read_dir(path)? {
+        entries.push(entry?);
+    }
+
+    entries.sort_by_key(|entry| entry.file_name());
+
+    for entry in entries {
+        println!("{}", entry.file_name().to_string_lossy());
+    }
+
+    Ok(())
 }
