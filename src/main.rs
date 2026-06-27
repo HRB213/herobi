@@ -106,7 +106,12 @@ fn main() {
 
 fn print_normal(entries: &[fs::DirEntry]) {
     for entry in entries {
-        println!("{}", entry.file_name().to_string_lossy());
+        let name = entry.file_name().to_string_lossy().to_string();
+        // 隠しファイル・隠しディレクトリは表示しない
+        if name.starts_with('.') {
+            continue;
+        }
+        println!("{}", name);
     }
 }
 
@@ -123,35 +128,28 @@ fn print_category(entries: &[fs::DirEntry]) {
     let mut other = Vec::new();
 
     for entry in entries {
+        let name = entry.file_name().to_string_lossy().to_string();
+
+        // 隠しファイル・隠しディレクトリは除外
+        if name.starts_with('.') {
+            continue;
+        }
+
         let path = entry.path();
 
         if path.is_dir() {
-            directories.push(entry.file_name().to_string_lossy().to_string());
+            directories.push(name);
             continue;
         }
 
         match category::classify(&path) {
-            Category::Rust => {
-                rust.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Markdown => {
-                markdown.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Image => {
-                image.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Audio => {
-                audio.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Video => {
-                video.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Archive => {
-                archive.push(entry.file_name().to_string_lossy().to_string())
-            }
-            Category::Other => {
-                other.push(entry.file_name().to_string_lossy().to_string())
-            }
+            Category::Rust => rust.push(name),
+            Category::Markdown => markdown.push(name),
+            Category::Image => image.push(name),
+            Category::Audio => audio.push(name),
+            Category::Video => video.push(name),
+            Category::Archive => archive.push(name),
+            Category::Other => other.push(name),
         }
     }
 
@@ -233,16 +231,18 @@ fn print_sizes(entries: &[fs::DirEntry]) {
     println!("--------------");
 
     for entry in entries {
+        let name = entry.file_name().to_string_lossy().to_string();
+
+        if name.starts_with('.') {
+            continue;
+        }
+
         let path = entry.path();
 
         if path.is_dir() {
             let size = dir_size(&path);
 
-            println!(
-                "{:<20} {}",
-                entry.file_name().to_string_lossy(),
-                human_size(size)
-            );
+            println!("{:<20} {}", name, human_size(size));
         }
     }
 
