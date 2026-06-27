@@ -34,6 +34,10 @@ brew install HRB213/homebrew-tap/herobi
 docker pull hrb213/herobi
 ```
 
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi
+```
+
 ## Homebrew Usage
 
 ```text
