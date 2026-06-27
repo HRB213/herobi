@@ -44,8 +44,6 @@ docker run --rm -v "$PWD":/work -w /work hrb213/herobi
 herobi [OPTIONS] [PATH]
 ```
 
-指定したディレクトリ内の構成を表示します。
-
 ```text
 -c, --category    ファイルを種類ごとに分類して表示
 -s, --size        ディレクトリごとの使用容量を表示
