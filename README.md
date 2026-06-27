@@ -20,7 +20,21 @@
 - ディレクトリごとの使用容量表示
 - ディレクトリ全体の件数・容量サマリー表示
 
-## Usage
+## Installation
+
+### Homebrew
+
+```bash
+brew install HRB213/homebrew-tap/herobi
+```
+
+### Docker
+
+```bash
+docker pull hrb213/herobi
+```
+
+## Homebrew Usage
 
 ```text
 herobi [OPTIONS] [PATH]
@@ -62,8 +76,6 @@ src
 target
 ```
 
----
-
 ### ファイルを種類ごとに分類
 
 ```bash
@@ -92,8 +104,6 @@ Cargo.toml
 LICENSE
 ```
 
----
-
 ### ディレクトリごとの使用容量
 
 ```bash
@@ -101,12 +111,12 @@ herobi -s
 ```
 
 ```text
+Directory Size
+--------------
 docs        24 KB
 src         38 KB
 target      2.1 MB
 ```
-
----
 
 ### ディレクトリ全体のサマリー
 
@@ -115,12 +125,12 @@ herobi -m
 ```
 
 ```text
+Summary
+-------
 Directories : 3
 Files       : 8
 Total Size  : 2.2 MB
 ```
-
----
 
 ### すべての機能を表示
 
@@ -160,4 +170,36 @@ Summary
 Directories : 3
 Files       : 8
 Total Size  : 2.2 MB
+```
+
+## Docker Usage
+
+Docker版では，対象とするディレクトリをコンテナへマウントして実行します。
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS]
+```
+
+### 一覧表示
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi
+```
+
+### ファイルを種類ごとに分類して表示
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi -c
+```
+
+### ディレクトリごとの使用容量を表示
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi -s
+```
+
+### ディレクトリ全体のサマリーを表示
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi -m
 ```
