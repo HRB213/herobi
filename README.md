@@ -177,5 +177,5 @@ Total Size  : 2.2 MB
 Docker版では，対象とするディレクトリをコンテナへマウントして実行します。
 
 ```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS]
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS] [PATH]
 ```
