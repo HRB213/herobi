@@ -87,7 +87,7 @@ fn main() {
 
     entries.sort_by_key(|e| e.file_name());
 
-    if !cli.category {
+    if !cli.category && !cli.size && !cli.summary {
         print_normal(&entries);
     }
 
