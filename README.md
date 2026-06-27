@@ -48,12 +48,6 @@ herobi [OPTIONS] [PATH]
 
 `PATH` を省略した場合は、カレントディレクトリを対象とします。
 
-### Arguments
-
-```text
-PATH    対象とするディレクトリのパス（省略可能）
-```
-
 ### Options
 
 ```text
@@ -64,7 +58,15 @@ PATH    対象とするディレクトリのパス（省略可能）
 -V, --version     バージョン情報を表示する
 ```
 
-## Examples
+## Docker Usage
+
+Docker版では、対象とするディレクトリをコンテナへマウントして実行します。
+
+```bash
+docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS] [PATH]
+```
+
+## Examples (Homebrew)
 
 ### 一覧表示
 
@@ -174,12 +176,4 @@ Summary
 Directories : 3
 Files       : 8
 Total Size  : 2.2 MB
-```
-
-## Docker Usage
-
-Docker版では、対象とするディレクトリをコンテナへマウントして実行します。
-
-```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS] [PATH]
 ```
