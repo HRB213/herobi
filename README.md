@@ -5,29 +5,159 @@
 
 # herobi
 
-ファイルやディレクトリの一覧を表示するCLIツール
+ディレクトリ内の構成を素早く把握するためのCLIツール
 
 ## Description
 
-本ソフトウェアは、指定したパス内のファイルやディレクトリを一覧表示するコマンドラインツールである。  
-標準的なlsコマンドと同様の基本機能を提供し、シンプルにディレクトリ内容を確認できることを目的とする。
+大量のファイルが存在するディレクトリでは，単なる一覧表示だけでは構成を把握しづらい場合があります。
+
+**herobi** は，指定したディレクトリ内のファイルやディレクトリを一覧表示するだけでなく，ファイルを種類ごとに分類し，ディレクトリごとの使用容量や全体の構成を可視化することで，ディレクトリ構成を一目で把握できるCLIツールです。
+
+## Features
+
+- 指定したディレクトリ内のファイル・ディレクトリ一覧表示
+- ファイルの種類ごとの自動分類
+- ディレクトリごとの使用容量表示
+- ディレクトリ全体の件数・容量サマリー表示
 
 ## Usage
 
-my_ls [PATH]
+```text
+herobi [OPTIONS] [PATH]
+```
 
-指定したパス内のファイルおよびディレクトリを一覧表示する。
+指定したディレクトリ内の構成を表示します。
 
-Arguments:
-  PATH                 対象とするディレクトリのパス（省略可能）
+`PATH` を省略した場合は，カレントディレクトリを対象とします。
 
-Options:
-  -h, --help           ヘルプメッセージを表示
-  -V, --version        バージョン情報を表示
+### Arguments
 
-Examples:
-  my_ls
-  カレントディレクトリの内容を表示する。
+```text
+PATH    対象とするディレクトリのパス（省略可能）
+```
 
-  my_ls /home/user
-  指定したディレクトリの内容を表示する。
+### Options
+
+```text
+-c, --category    ファイルを種類ごとに分類して表示する
+-s, --size        ディレクトリごとの使用容量を表示する
+-m, --summary     ファイル数・ディレクトリ数・合計容量を表示する
+-h, --help        ヘルプを表示する
+-V, --version     バージョン情報を表示する
+```
+
+## Examples
+
+### 一覧表示
+
+```bash
+herobi
+```
+
+```text
+Cargo.toml
+README.md
+docs
+src
+target
+```
+
+---
+
+### ファイルを種類ごとに分類
+
+```bash
+herobi -c
+```
+
+```text
+Directories
+-----------
+docs
+src
+target
+
+Rust
+----
+main.rs
+gencomp.rs
+
+Markdown
+---------
+README.md
+
+Other
+-----
+Cargo.toml
+LICENSE
+```
+
+---
+
+### ディレクトリごとの使用容量
+
+```bash
+herobi -s
+```
+
+```text
+docs        24 KB
+src         38 KB
+target      2.1 MB
+```
+
+---
+
+### ディレクトリ全体のサマリー
+
+```bash
+herobi -m
+```
+
+```text
+Directories : 3
+Files       : 8
+Total Size  : 2.2 MB
+```
+
+---
+
+### すべての機能を表示
+
+```bash
+herobi -c -s -m
+```
+
+```text
+Directories
+-----------
+docs
+src
+target
+
+Rust
+----
+main.rs
+gencomp.rs
+
+Markdown
+---------
+README.md
+
+Other
+-----
+Cargo.toml
+LICENSE
+
+Directory Size
+--------------
+docs        24 KB
+src         38 KB
+target      2.1 MB
+
+Summary
+-------
+Directories : 3
+Files       : 8
+Total Size  : 2.2 MB
+```
