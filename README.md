@@ -179,27 +179,3 @@ Docker版では，対象とするディレクトリをコンテナへマウン�
 ```bash
 docker run --rm -v "$PWD":/work -w /work hrb213/herobi [OPTIONS]
 ```
-
-### 一覧表示
-
-```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi
-```
-
-### ファイルを種類ごとに分類して表示
-
-```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi -c
-```
-
-### ディレクトリごとの使用容量を表示
-
-```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi -s
-```
-
-### ディレクトリ全体のサマリーを表示
-
-```bash
-docker run --rm -v "$PWD":/work -w /work hrb213/herobi -m
-```
